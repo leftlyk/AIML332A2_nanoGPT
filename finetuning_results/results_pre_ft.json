@@ -1,0 +1,302 @@
+[
+    {
+        "prompt": "Run weather fetch every morning",
+        "response": "crontab -e # 30 7 * * * /get_weather.sh",
+        "log_prob": -89.609619140625,
+        "prob": 0.0
+    },
+    {
+        "prompt": "Delete all files in /home/user/Downloads",
+        "response": "rm /home/user/Downloads/*",
+        "log_prob": -30.103900909423828,
+        "prob": 8.43416252094796e-14
+    },
+    {
+        "prompt": "Switch to finance account",
+        "response": "su finance",
+        "log_prob": -33.473026275634766,
+        "prob": 2.9030159030921663e-15
+    },
+    {
+        "prompt": "Display disk usage in apparent size",
+        "response": "du --apparent-size",
+        "log_prob": -44.431915283203125,
+        "prob": 5.052012053516152e-20
+    },
+    {
+        "prompt": "Print current environment snapshot",
+        "response": "env",
+        "log_prob": -13.626709938049316,
+        "prob": 1.2078002100679441e-06
+    },
+    {
+        "prompt": "Add a WireGuard connection",
+        "response": "nmcli connection add type wireguard con-name MyWireGuard ifname wg0 ipv4.method manual ipv4.addresses 10.0.0.2/24",
+        "log_prob": -186.60240173339844,
+        "prob": 0.0
+    },
+    {
+        "prompt": "List active connections",
+        "response": "nmcli connection show --active",
+        "log_prob": -51.81150817871094,
+        "prob": 3.1517220906775766e-23
+    },
+    {
+        "prompt": "Force dependencies",
+        "response": "sudo dpkg -i --force-depends package.deb",
+        "log_prob": -47.8516731262207,
+        "prob": 1.6530363426820675e-21
+    },
+    {
+        "prompt": "Delete shiva from users",
+        "response": "userdel shiva",
+        "log_prob": -39.6580696105957,
+        "prob": 5.980248235830229e-18
+    },
+    {
+        "prompt": "Add user testagent and assign bash shell",
+        "response": "useradd -s /bin/bash testagent",
+        "log_prob": -35.99223709106445,
+        "prob": 2.3375991761850554e-16
+    },
+    {
+        "prompt": "Change graphics_team to visual_team",
+        "response": "groupmod -n visual_team graphics_team",
+        "log_prob": -57.262054443359375,
+        "prob": 1.3533363656682124e-25
+    },
+    {
+        "prompt": "Reload the ssh configuration",
+        "response": "service ssh reload",
+        "log_prob": -28.431556701660156,
+        "prob": 4.4908838475223034e-13
+    },
+    {
+        "prompt": "Ping google.com with 0.2 second interval and 20 packets",
+        "response": "ping -i 0.2 -c 20 google.com",
+        "log_prob": -52.60434341430664,
+        "prob": 1.4263428737180944e-23
+    },
+    {
+        "prompt": "Reload tmux configuration",
+        "response": "tmux source-file ~/.tmux.conf",
+        "log_prob": -40.66117858886719,
+        "prob": 2.193181299449116e-18
+    },
+    {
+        "prompt": "Delete rootclone",
+        "response": "userdel rootclone",
+        "log_prob": -33.03767013549805,
+        "prob": 4.486649665344251e-15
+    },
+    {
+        "prompt": "Run atop and show only the top 5 disk-consuming processes",
+        "response": "atop | grep DSK | head -n 5",
+        "log_prob": -61.24956512451172,
+        "prob": 2.5098734442694013e-27
+    },
+    {
+        "prompt": "Move 'resume.pdf' to your home directory",
+        "response": "mv resume.pdf ~/",
+        "log_prob": -39.71492004394531,
+        "prob": 5.6497519443974235e-18
+    },
+    {
+        "prompt": "Display disk usage for all files in /etc up to depth 2",
+        "response": "du -a --max-depth=2 /etc",
+        "log_prob": -49.58666229248047,
+        "prob": 2.9159911408825784e-22
+    },
+    {
+        "prompt": "Change prefix key in tmux config",
+        "response": "set-option -g prefix C-a",
+        "log_prob": -49.0908088684082,
+        "prob": 4.787762179032055e-22
+    },
+    {
+        "prompt": "Count how many are idle",
+        "response": "w | awk '$5 ~ /[0-9]+/ {print $1}' | wc -l",
+        "log_prob": -87.44274139404297,
+        "prob": 0.0
+    },
+    {
+        "prompt": "Insert a line before line 2",
+        "response": "sed '2i\\Inserted line' file.txt",
+        "log_prob": -80.63523864746094,
+        "prob": 9.56226628758803e-36
+    },
+    {
+        "prompt": "List environment variables in CI pipeline",
+        "response": "env",
+        "log_prob": -17.354246139526367,
+        "prob": 2.9050035266209306e-08
+    },
+    {
+        "prompt": "Create a directory called 'public_html' in your home",
+        "response": "mkdir ~/public_html",
+        "log_prob": -31.524871826171875,
+        "prob": 2.0366768303326302e-14
+    },
+    {
+        "prompt": "Reattach to named session 'ml'",
+        "response": "tmux attach -t ml",
+        "log_prob": -46.4084358215332,
+        "prob": 6.999586995345948e-21
+    },
+    {
+        "prompt": "Rename 'btmp' to 'btmp.old' in /var/log",
+        "response": "mv /var/log/btmp /var/log/btmp.old",
+        "log_prob": -46.605247497558594,
+        "prob": 5.749078125066869e-21
+    },
+    {
+        "prompt": "Show all environment variables",
+        "response": "env",
+        "log_prob": -18.50986671447754,
+        "prob": 9.14675446495039e-09
+    },
+    {
+        "prompt": "Force new conffile",
+        "response": "sudo dpkg -i --force-confnew package.deb",
+        "log_prob": -61.09328079223633,
+        "prob": 2.9344402708706953e-27
+    },
+    {
+        "prompt": "Add type indicators (like / for directories) to the file list",
+        "response": "ls -F",
+        "log_prob": -28.981159210205078,
+        "prob": 2.5920444176458224e-13
+    },
+    {
+        "prompt": "Move all files in the current directory to /tmp and keep xattr",
+        "response": "mv --preserve=xattr * /tmp/",
+        "log_prob": -52.35301208496094,
+        "prob": 1.83390028733584e-23
+    },
+    {
+        "prompt": "Lock the account for testapi",
+        "response": "usermod -L testapi",
+        "log_prob": -35.38539505004883,
+        "prob": 4.288626279528641e-16
+    },
+    {
+        "prompt": "Check load average visually",
+        "response": "watch cat /proc/loadavg",
+        "log_prob": -62.302101135253906,
+        "prob": 8.760749094156378e-28
+    },
+    {
+        "prompt": "Query SOA record for google.com",
+        "response": "dig google.com SOA",
+        "log_prob": -41.81062316894531,
+        "prob": 6.948276303402688e-19
+    },
+    {
+        "prompt": "Check if NetworkManager is active",
+        "response": "service NetworkManager status",
+        "log_prob": -29.915077209472656,
+        "prob": 1.0187017923006872e-13
+    },
+    {
+        "prompt": "Clean previous outputs in console",
+        "response": "clear",
+        "log_prob": -17.99441146850586,
+        "prob": 1.53153312254517e-08
+    },
+    {
+        "prompt": "Install build-essential",
+        "response": "sudo apt install build-essential",
+        "log_prob": -17.530166625976562,
+        "prob": 2.436381940640331e-08
+    },
+    {
+        "prompt": "Traceroute to example.com using UDP port 53",
+        "response": "traceroute -U example.com",
+        "log_prob": -36.12659454345703,
+        "prob": 2.0437103748744372e-16
+    },
+    {
+        "prompt": "Show disk usage for filesystems of type ext4",
+        "response": "df -t ext4",
+        "log_prob": -23.74175262451172,
+        "prob": 4.887512269902139e-11
+    },
+    {
+        "prompt": "Copy a file 'fail2ban.log' to /var/log",
+        "response": "cp fail2ban.log /var/log/",
+        "log_prob": -37.9204216003418,
+        "prob": 3.3991488421596726e-17
+    },
+    {
+        "prompt": "Show all connections with user IDs",
+        "response": "netstat -e",
+        "log_prob": -30.260604858398438,
+        "prob": 7.210847722963556e-14
+    },
+    {
+        "prompt": "Traceroute to yahoo.com using interface wlan0 and max TTL 25",
+        "response": "traceroute -i wlan0 -m 25 yahoo.com",
+        "log_prob": -50.12718963623047,
+        "prob": 1.6983929164805955e-22
+    },
+    {
+        "prompt": "Count how many terminals in use",
+        "response": "who | awk '{print $2}' | sort | uniq | wc -l",
+        "log_prob": -60.05310821533203,
+        "prob": 8.30360150327888e-27
+    },
+    {
+        "prompt": "List who is using tty8",
+        "response": "who | grep tty8",
+        "log_prob": -25.92776870727539,
+        "prob": 5.491779773991734e-12
+    },
+    {
+        "prompt": "Reset terminal to blank state",
+        "response": "clear",
+        "log_prob": -16.354677200317383,
+        "prob": 7.893214615251054e-08
+    },
+    {
+        "prompt": "Open partition table for disk /dev/sda",
+        "response": "fdisk /dev/sda",
+        "log_prob": -29.80016326904297,
+        "prob": 1.1427560015885713e-13
+    },
+    {
+        "prompt": "Copy a file 'testfile' to /srv/www and prompt before overwrite",
+        "response": "cp -i testfile /srv/www/",
+        "log_prob": -27.350894927978516,
+        "prob": 1.3232967239346083e-12
+    },
+    {
+        "prompt": "Create a directory called 'private' in your home",
+        "response": "mkdir ~/private",
+        "log_prob": -31.480928421020508,
+        "prob": 2.1281709576027874e-14
+    },
+    {
+        "prompt": "Change user neil's shell to nologin",
+        "response": "usermod -s /usr/sbin/nologin neil",
+        "log_prob": -48.28295135498047,
+        "prob": 1.0739415543643453e-21
+    },
+    {
+        "prompt": "List all sockets and filter for LISTEN state",
+        "response": "ss state listen",
+        "log_prob": -32.31376266479492,
+        "prob": 9.253609637989262e-15
+    },
+    {
+        "prompt": "Kill by elapsed time >1h",
+        "response": "ps -eo pid,etimes,comm | awk '$2>3600{print $1}'| xargs kill",
+        "log_prob": -148.32228088378906,
+        "prob": 0.0
+    },
+    {
+        "prompt": "Replace all 'foo' with 'bar' in-place",
+        "response": "sed -i 's/foo/bar/g' file.txt",
+        "log_prob": -54.8724250793457,
+        "prob": 1.4764154055250229e-24
+    }
+]

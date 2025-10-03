@@ -9,6 +9,7 @@ import tiktoken
 from model import GPTConfig, GPT
 import matplotlib.pyplot as plt
 from utils import plot_step_probs
+import json
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
@@ -21,9 +22,8 @@ top_k = 200 # retain only the top_k most likely tokens, clamp others to have 0 p
 seed = 1337
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', etc.
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32' or 'bfloat16' or 'float16'
-show_probs = False
-show_seq_probs = False
-fixed_response = ''
+input_filepath = 'eval_data.json'
+stage = 'pre_ft'
 compile = False # use PyTorch 2.0 to compile the model to be faster
 exec(open('configurator.py').read()) # overrides from command line or config file
 # -----------------------------------------------------------------------------
@@ -85,31 +85,37 @@ if start.startswith('FILE:'):
 start_ids = encode(start)
 x = (torch.tensor(start_ids, dtype=torch.long, device=device)[None, ...])
 
-# run generation
-with torch.no_grad():
-    with ctx:
-        for k in range(num_samples):
-            if show_probs:
-                y, step_data = model.generate_with_probs(x, max_new_tokens, temperature=temperature, top_k=top_k)
-                for step, (probs, idx_candidates, idx_next) in enumerate(step_data):
-                    if step < 5:
-                        plot_step_probs(probs, idx_candidates, idx_next[0], step, decode, out_dir="out")
-            elif show_seq_probs:
-                y, seq_log_prob = model.generate_with_sequence_prob(x, max_new_tokens, temperature=temperature, top_k=top_k)
-                seq_prob = seq_log_prob.exp()
+def eval(input_filepath, model, temperature):
 
-                # print in scientific notation
-                print(f"log prob: {seq_log_prob.item():.4f}")
-                print(f"prob: {seq_prob.item():.3e}")
-            elif fixed_response != '':
-                fixed_response_tokens = encode(fixed_response)
-                y, seq_log_prob = model.generate_with_fixed_response(x, fixed_response_tokens, temperature=temperature)
+    with open(input_filepath, mode='r') as f:
+        prompt_res_pairs = json.load(f)
+
+    eval_results = []
+
+    with torch.no_grad():
+        with ctx:
+            for pair in prompt_res_pairs:
+
+                prompt = encode(pair['input'])
+                prompt = (torch.tensor(prompt, dtype=torch.long, device=device)[None, ...])
+                response = encode(pair['output'])
+
+                y, seq_log_prob = model.generate_with_fixed_response(prompt, response, temperature=temperature)
                 seq_prob = seq_log_prob.exp()
                 # print in scientific notation
                 print(f"log prob: {seq_log_prob.item():.4f}")
                 print(f"prob: {seq_prob.item():.3e}")
+                print(decode(y[0].tolist()))
 
-            else:
-                y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
-            print(decode(y[0].tolist()))
-            print('---------------')
+                pair_results = {}
+                pair_results["prompt"] = pair['input']
+                pair_results["response"] = pair['output']
+                pair_results["log_prob"] = seq_log_prob.item()
+                pair_results["prob"]= seq_prob.item()
+
+                eval_results.append(pair_results)
+
+    with open(f'finetuning_results/results_{stage}.json', mode="w") as f:
+        json.dump(eval_results, f, indent=4)
+
+eval(input_filepath, model, temperature)

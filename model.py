@@ -10,10 +10,13 @@ https://github.com/huggingface/transformers/blob/main/src/transformers/models/gp
 import math
 import inspect
 from dataclasses import dataclass
+import matplotlib.pyplot as plt
+import os
 
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+import math
 
 class LayerNorm(nn.Module):
     """ LayerNorm but with an optional bias. PyTorch doesn't support simply bias=False """
@@ -328,3 +331,100 @@ class GPT(nn.Module):
             idx = torch.cat((idx, idx_next), dim=1)
 
         return idx
+
+    @torch.no_grad()
+    def generate_with_probs(self, idx, max_new_tokens, temperature=1.0, top_k=None):
+        step_data = []
+
+        for i in range(max_new_tokens):
+            idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
+            logits, _ = self(idx_cond)
+
+            logits = logits[:, -1, :] / temperature
+            if top_k is not None:
+                v, _ = torch.topk(logits, min(top_k, logits.size(-1)))
+                logits[logits < v[:, [-1]]] = -float('Inf')
+
+            probs = F.softmax(logits, dim=-1)
+
+            # draw 10 candidates
+            idx_candidates = torch.multinomial(probs, num_samples=10)  # shape: (1, 10)
+            idx_next = idx_candidates[0, 0].unsqueeze(0).unsqueeze(0)    # shape (1,1)
+
+            # append to sequence
+            idx = torch.cat((idx, idx_next), dim=1)
+
+            # save flat lists for plotting
+            step_data.append((
+                probs.squeeze(0).cpu(),         # shape (vocab_size,)
+                idx_candidates.squeeze(0).cpu(),# shape (10,)
+                idx_next.squeeze(0).cpu()       # shape (1,)
+            ))
+
+        return idx, step_data
+
+    @torch.no_grad()
+    def generate_with_sequence_prob(self, idx, max_new_tokens, temperature=1.0, top_k=None):
+        seq_log_prob = torch.zeros(idx.size(0), device=idx.device)  # batch size
+        for _ in range(max_new_tokens):
+            # if the sequence context is growing too long we must crop it at block_size
+            idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
+
+            # forward the model
+            logits, _ = self(idx_cond)
+            logits = logits[:, -1, :] / temperature
+
+            # top-k filter
+            if top_k is not None:
+                v, _ = torch.topk(logits, min(top_k, logits.size(-1)))
+                logits[logits < v[:, [-1]]] = -float('Inf')
+
+            # convert to probs
+            probs = F.softmax(logits, dim=-1)
+            log_probs = F.log_softmax(logits, dim=-1)
+
+            # sample from the distribution
+            idx_next = torch.multinomial(probs, num_samples=1)
+
+            # add the log-prob of the chosen token
+            token_log_prob = log_probs.gather(1, idx_next).squeeze(1)
+            seq_log_prob += token_log_prob
+
+            # append sampled index
+            idx = torch.cat((idx, idx_next), dim=1)
+
+        return idx, seq_log_prob
+
+
+    @torch.no_grad()
+    def generate_with_fixed_response(self, idx, fixed_response, temperature=1.0):
+        seq_log_prob = torch.zeros(idx.size(0), device=idx.device)  # batch size
+
+        for token in fixed_response:
+            # Crop context if too long
+            idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
+
+            # Forward pass
+            logits, _ = self(idx_cond)
+            logits = logits[:, -1, :] / temperature
+
+            # Log probabilities
+            log_probs = F.log_softmax(logits, dim=-1)
+
+            # Force token
+            token_next = torch.full((idx.size(0), 1), token, device=idx.device)
+            token_log_prob = log_probs.gather(1, token_next).squeeze(1)
+            seq_log_prob += token_log_prob
+
+            # Append token
+            idx = torch.cat((idx, token_next), dim=1)
+
+        # Extract only the response tokens
+        forced_tensor = idx[:, -len(fixed_response):]
+
+        return forced_tensor, seq_log_prob
+
+
+
+
+

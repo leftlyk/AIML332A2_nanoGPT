@@ -1,13 +1,15 @@
 import time
+import json
 
-out_dir = 'out-shakespeare'
+out_dir = 'out-linuxcommands'
 eval_interval = 5
 eval_iters = 40
 wandb_log = False # feel free to turn on
-wandb_project = 'shakespeare'
+wandb_project = 'linuxcommands'
 wandb_run_name = 'ft-' + str(time.time())
 
-dataset = 'shakespeare'
+dataset = 'linuxcommands'
+init_from = 'gpt2'
 
 # only save checkpoints if the validation loss improves
 always_save_checkpoint = False

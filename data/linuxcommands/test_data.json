@@ -1,0 +1,202 @@
+[
+    {
+        "input": "Run weather fetch every morning",
+        "output": "crontab -e # 30 7 * * * /get_weather.sh"
+    },
+    {
+        "input": "Delete all files in /home/user/Downloads",
+        "output": "rm /home/user/Downloads/*"
+    },
+    {
+        "input": "Switch to finance account",
+        "output": "su finance"
+    },
+    {
+        "input": "Display disk usage in apparent size",
+        "output": "du --apparent-size"
+    },
+    {
+        "input": "Print current environment snapshot",
+        "output": "env"
+    },
+    {
+        "input": "Add a WireGuard connection",
+        "output": "nmcli connection add type wireguard con-name MyWireGuard ifname wg0 ipv4.method manual ipv4.addresses 10.0.0.2/24"
+    },
+    {
+        "input": "List active connections",
+        "output": "nmcli connection show --active"
+    },
+    {
+        "input": "Force dependencies",
+        "output": "sudo dpkg -i --force-depends package.deb"
+    },
+    {
+        "input": "Delete shiva from users",
+        "output": "userdel shiva"
+    },
+    {
+        "input": "Add user testagent and assign bash shell",
+        "output": "useradd -s /bin/bash testagent"
+    },
+    {
+        "input": "Change graphics_team to visual_team",
+        "output": "groupmod -n visual_team graphics_team"
+    },
+    {
+        "input": "Reload the ssh configuration",
+        "output": "service ssh reload"
+    },
+    {
+        "input": "Ping google.com with 0.2 second interval and 20 packets",
+        "output": "ping -i 0.2 -c 20 google.com"
+    },
+    {
+        "input": "Reload tmux configuration",
+        "output": "tmux source-file ~/.tmux.conf"
+    },
+    {
+        "input": "Delete rootclone",
+        "output": "userdel rootclone"
+    },
+    {
+        "input": "Run atop and show only the top 5 disk-consuming processes",
+        "output": "atop | grep DSK | head -n 5"
+    },
+    {
+        "input": "Move 'resume.pdf' to your home directory",
+        "output": "mv resume.pdf ~/"
+    },
+    {
+        "input": "Display disk usage for all files in /etc up to depth 2",
+        "output": "du -a --max-depth=2 /etc"
+    },
+    {
+        "input": "Change prefix key in tmux config",
+        "output": "set-option -g prefix C-a"
+    },
+    {
+        "input": "Count how many are idle",
+        "output": "w | awk '$5 ~ /[0-9]+/ {print $1}' | wc -l"
+    },
+    {
+        "input": "Insert a line before line 2",
+        "output": "sed '2i\\Inserted line' file.txt"
+    },
+    {
+        "input": "List environment variables in CI pipeline",
+        "output": "env"
+    },
+    {
+        "input": "Create a directory called 'public_html' in your home",
+        "output": "mkdir ~/public_html"
+    },
+    {
+        "input": "Reattach to named session 'ml'",
+        "output": "tmux attach -t ml"
+    },
+    {
+        "input": "Rename 'btmp' to 'btmp.old' in /var/log",
+        "output": "mv /var/log/btmp /var/log/btmp.old"
+    },
+    {
+        "input": "Show all environment variables",
+        "output": "env"
+    },
+    {
+        "input": "Force new conffile",
+        "output": "sudo dpkg -i --force-confnew package.deb"
+    },
+    {
+        "input": "Add type indicators (like / for directories) to the file list",
+        "output": "ls -F"
+    },
+    {
+        "input": "Move all files in the current directory to /tmp and keep xattr",
+        "output": "mv --preserve=xattr * /tmp/"
+    },
+    {
+        "input": "Lock the account for testapi",
+        "output": "usermod -L testapi"
+    },
+    {
+        "input": "Check load average visually",
+        "output": "watch cat /proc/loadavg"
+    },
+    {
+        "input": "Query SOA record for google.com",
+        "output": "dig google.com SOA"
+    },
+    {
+        "input": "Check if NetworkManager is active",
+        "output": "service NetworkManager status"
+    },
+    {
+        "input": "Clean previous outputs in console",
+        "output": "clear"
+    },
+    {
+        "input": "Install build-essential",
+        "output": "sudo apt install build-essential"
+    },
+    {
+        "input": "Traceroute to example.com using UDP port 53",
+        "output": "traceroute -U example.com"
+    },
+    {
+        "input": "Show disk usage for filesystems of type ext4",
+        "output": "df -t ext4"
+    },
+    {
+        "input": "Copy a file 'fail2ban.log' to /var/log",
+        "output": "cp fail2ban.log /var/log/"
+    },
+    {
+        "input": "Show all connections with user IDs",
+        "output": "netstat -e"
+    },
+    {
+        "input": "Traceroute to yahoo.com using interface wlan0 and max TTL 25",
+        "output": "traceroute -i wlan0 -m 25 yahoo.com"
+    },
+    {
+        "input": "Count how many terminals in use",
+        "output": "who | awk '{print $2}' | sort | uniq | wc -l"
+    },
+    {
+        "input": "List who is using tty8",
+        "output": "who | grep tty8"
+    },
+    {
+        "input": "Reset terminal to blank state",
+        "output": "clear"
+    },
+    {
+        "input": "Open partition table for disk /dev/sda",
+        "output": "fdisk /dev/sda"
+    },
+    {
+        "input": "Copy a file 'testfile' to /srv/www and prompt before overwrite",
+        "output": "cp -i testfile /srv/www/"
+    },
+    {
+        "input": "Create a directory called 'private' in your home",
+        "output": "mkdir ~/private"
+    },
+    {
+        "input": "Change user neil's shell to nologin",
+        "output": "usermod -s /usr/sbin/nologin neil"
+    },
+    {
+        "input": "List all sockets and filter for LISTEN state",
+        "output": "ss state listen"
+    },
+    {
+        "input": "Kill by elapsed time >1h",
+        "output": "ps -eo pid,etimes,comm | awk '$2>3600{print $1}'| xargs kill"
+    },
+    {
+        "input": "Replace all 'foo' with 'bar' in-place",
+        "output": "sed -i 's/foo/bar/g' file.txt"
+    }
+]
