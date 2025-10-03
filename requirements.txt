@@ -1,6 +1,7 @@
 transformers
-pytorch
+torch
 numpy
 tiktoken
 wandb
 tqdm
+matplotlib
