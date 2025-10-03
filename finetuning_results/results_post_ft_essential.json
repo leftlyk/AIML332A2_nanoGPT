@@ -1,0 +1,122 @@
+[
+    {
+        "prompt": "Create a new directory called 'projects'",
+        "response": "mkdir projects",
+        "log_prob": -17.857559204101562,
+        "prob": 1.7561458065529223e-08
+    },
+    {
+        "prompt": "Remove the directory named 'old_files'",
+        "response": "rmdir old_files",
+        "log_prob": -28.505054473876953,
+        "prob": 4.1726518074103325e-13
+    },
+    {
+        "prompt": "List all files in the current directory",
+        "response": "ls",
+        "log_prob": -20.454416275024414,
+        "prob": 1.308458341675589e-09
+    },
+    {
+        "prompt": "List all files including hidden ones",
+        "response": "ls -a",
+        "log_prob": -26.282596588134766,
+        "prob": 3.851353264083812e-12
+    },
+    {
+        "prompt": "Show current working directory",
+        "response": "pwd",
+        "log_prob": -18.812606811523438,
+        "prob": 6.7575407491915485e-09
+    },
+    {
+        "prompt": "Copy 'file1.txt' to 'file2.txt'",
+        "response": "cp file1.txt file2.txt",
+        "log_prob": -18.63117790222168,
+        "prob": 8.101813442351613e-09
+    },
+    {
+        "prompt": "Move 'file1.txt' to the folder 'backup'",
+        "response": "mv file1.txt backup/",
+        "log_prob": -30.49224853515625,
+        "prob": 5.719850862482417e-14
+    },
+    {
+        "prompt": "Remove the file 'temp.txt'",
+        "response": "rm temp.txt",
+        "log_prob": -19.89580535888672,
+        "prob": 2.287502187670043e-09
+    },
+    {
+        "prompt": "Display the contents of 'notes.txt'",
+        "response": "cat notes.txt",
+        "log_prob": -20.97254753112793,
+        "prob": 7.793604095418516e-10
+    },
+    {
+        "prompt": "Display the first 10 lines of 'log.txt'",
+        "response": "head log.txt",
+        "log_prob": -31.341358184814453,
+        "prob": 2.4469274127530624e-14
+    },
+    {
+        "prompt": "Display the last 10 lines of 'log.txt'",
+        "response": "tail log.txt",
+        "log_prob": -26.2213134765625,
+        "prob": 4.094757952849415e-12
+    },
+    {
+        "prompt": "Find files named 'report.txt' in the current directory",
+        "response": "find . -name report.txt",
+        "log_prob": -36.249229431152344,
+        "prob": 1.8078386982393083e-16
+    },
+    {
+        "prompt": "Search for the word 'error' in 'log.txt'",
+        "response": "grep 'error' log.txt",
+        "log_prob": -21.295392990112305,
+        "prob": 5.643237543928592e-10
+    },
+    {
+        "prompt": "Show disk usage in human-readable format",
+        "response": "df -h",
+        "log_prob": -20.938617706298828,
+        "prob": 8.062576717371428e-10
+    },
+    {
+        "prompt": "Show memory usage",
+        "response": "free -h",
+        "log_prob": -26.847637176513672,
+        "prob": 2.1888667094127623e-12
+    },
+    {
+        "prompt": "Change permissions of 'script.sh' to make it executable",
+        "response": "chmod +x script.sh",
+        "log_prob": -19.887096405029297,
+        "prob": 2.3075108490644425e-09
+    },
+    {
+        "prompt": "Print the last 50 lines of 'access.log' continuously",
+        "response": "tail -n 50 -f access.log",
+        "log_prob": -31.853288650512695,
+        "prob": 1.4665352265907927e-14
+    },
+    {
+        "prompt": "Show currently running processes",
+        "response": "ps",
+        "log_prob": -18.99766731262207,
+        "prob": 5.615881093490316e-09
+    },
+    {
+        "prompt": "Kill a process with PID 1234",
+        "response": "kill 1234",
+        "log_prob": -23.520166397094727,
+        "prob": 6.099883098631409e-11
+    },
+    {
+        "prompt": "Display the manual for the 'ls' command",
+        "response": "man ls",
+        "log_prob": -25.231857299804688,
+        "prob": 1.1013963178985176e-11
+    }
+]
