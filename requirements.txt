@@ -1,0 +1,6 @@
+transformers
+pytorch
+numpy
+tiktoken
+wandb
+tqdm
