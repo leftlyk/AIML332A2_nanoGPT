@@ -105,6 +105,7 @@ def eval(input_filepath, model, temperature):
                 # print in scientific notation
                 print(f"log prob: {seq_log_prob.item():.4f}")
                 print(f"prob: {seq_prob.item():.3e}")
+                print(pair['input'])
                 print(decode(y[0].tolist()))
 
                 pair_results = {}
