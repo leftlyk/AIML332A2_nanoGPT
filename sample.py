@@ -24,6 +24,9 @@ dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported
 show_probs = False
 show_seq_probs = False
 fixed_response = ''
+generate_creatively=False
+unlikeliness=5234
+creativity=0.95
 compile = False # use PyTorch 2.0 to compile the model to be faster
 exec(open('configurator.py').read()) # overrides from command line or config file
 # -----------------------------------------------------------------------------
@@ -108,6 +111,9 @@ with torch.no_grad():
                 # print in scientific notation
                 print(f"log prob: {seq_log_prob.item():.4f}")
                 print(f"prob: {seq_prob.item():.3e}")
+            elif generate_creatively:
+                y = model.generate_creatively(x, max_new_tokens, temperature=temperature, unlikeliness=unlikeliness, creativity=creativity)
+
 
             else:
                 y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
